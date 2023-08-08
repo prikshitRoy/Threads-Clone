@@ -1,6 +1,7 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-Instalation:
+## Instalation:
+
 **Clerk **
 **@uploadthing/react** - using this to upload prifile Images ( React-specific library )
 **uploadthing** - For uploading
@@ -11,6 +12,10 @@ Instalation:
 ```bash
 yarn add @clerk/nextjs @uploadthing/react mongoose svix uploadthing tailwindcss-animate
 ```
+
+## New things:-
+
+- Search Engin Optimization
 
 ## Getting Started
 
