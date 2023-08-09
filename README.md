@@ -2,15 +2,16 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Instalation:
 
-**Clerk **
+**Clerk** - for Auth
+**@clerk/themes** - to add theme to clerk components
 **@uploadthing/react** - using this to upload prifile Images ( React-specific library )
-**uploadthing** - For uploading
+**@uploadthing** - For uploading
 **MongoDB** - mongoose for Database
 **svix** - for Webhooks
 **tailwindcss-animate** - for tailwindCSS animation
 
 ```bash
-yarn add @clerk/nextjs @uploadthing/react mongoose svix uploadthing tailwindcss-animate
+yarn add @clerk/nextjs @uploadthing/react mongoose svix uploadthing tailwindcss-animate @clerk/themes
 ```
 
 ## New things:-
