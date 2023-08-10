@@ -14,6 +14,12 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 yarn add @clerk/nextjs @uploadthing/react mongoose svix uploadthing tailwindcss-animate @clerk/themes
 ```
 
+**shadcn UI Components**
+
+```bash
+npx shadcn-ui@latest init
+```
+
 ## New things:-
 
 - Search Engin Optimization
