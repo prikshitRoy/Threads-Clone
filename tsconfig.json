@@ -5,7 +5,7 @@
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
-    "noUncheckedIndexedAccess": true, // Custom => https://youtu.be/OQIsQDFtEnI?t=125
+    //"noUncheckedIndexedAccess": true, // Custom => https://youtu.be/OQIsQDFtEnI?t=125
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
