@@ -19,7 +19,6 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 
 import { ThreadValidation } from "@/lib/validations/Thread";
-import { updateUser } from "@/lib/actions/user.actions";
 import { createThread } from "@/lib/actions/thread.action";
 
 interface Props {
@@ -85,8 +84,3 @@ export default function PostThread({ userId }: { userId: string }) {
     </Form>
   );
 }
-
-/* 
-
-
-*/
