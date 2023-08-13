@@ -3,7 +3,7 @@
 import React from "react";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
@@ -11,12 +11,12 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { CommentValidation } from "@/lib/validations/Thread";
 import Image from "next/image";
+import { addCommentToThread } from "@/lib/actions/thread.action";
 // import { createThread } from "@/lib/actions/thread.action";
 interface Props {
   threadId: string;
@@ -24,11 +24,10 @@ interface Props {
   currentUserId: string;
 }
 
-const Comment = ({ threadId, currentUserImg, currentUserId }: Props) => {
-  const router = useRouter();
+function Comment({ threadId, currentUserImg, currentUserId }: Props) {
   const pathname = usePathname();
 
-  const form = useForm({
+  const form = useForm<z.infer<typeof CommentValidation>>({
     resolver: zodResolver(CommentValidation),
     defaultValues: {
       thread: "",
@@ -36,21 +35,19 @@ const Comment = ({ threadId, currentUserImg, currentUserId }: Props) => {
   });
 
   const onSubmit = async (values: z.infer<typeof CommentValidation>) => {
-    /*       await createThread({
-        text: values.thread,
-        author: userId,
-        communityId: null,
-        path: pathname,
-      });
- */
-    router.push("/");
+    await addCommentToThread(
+      threadId,
+      values.thread,
+      JSON.parse(currentUserId),
+      pathname,
+    );
+
+    form.reset();
   };
 
   return (
     <Form {...form}>
-      <form
-        /* onSubmit={form.handleSubmit(onSubmit)} */ className="comment-form"
-      >
+      <form onSubmit={form.handleSubmit(onSubmit)} className="comment-form">
         <FormField
           control={form.control}
           name="thread"
@@ -69,7 +66,7 @@ const Comment = ({ threadId, currentUserImg, currentUserId }: Props) => {
                 <Input
                   type="text"
                   {...field}
-                  placeholder="Comment"
+                  placeholder="Comment..."
                   className="no-focus out text-light-1"
                 />
               </FormControl>
@@ -82,5 +79,5 @@ const Comment = ({ threadId, currentUserImg, currentUserId }: Props) => {
       </form>
     </Form>
   );
-};
+}
 export default Comment;

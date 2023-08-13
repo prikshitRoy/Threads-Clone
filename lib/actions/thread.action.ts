@@ -61,13 +61,13 @@ export async function featchPosts(pageNumber = 1, pageSize = 20) {
     });
 
   // Total post count
-  const totalPostCount = await Thread.countDocuments({
+  const totalPostsCount = await Thread.countDocuments({
     parentId: { $in: [null, undefined] },
   });
 
   const posts = await postsQuery.exec();
 
-  const isNext = totalPostCount > skipAmount + posts.length;
+  const isNext = totalPostsCount > skipAmount + posts.length;
 
   return { posts, isNext };
 }
@@ -107,5 +107,44 @@ export async function fetchThreadById(id: string) {
     return thread;
   } catch (error: any) {
     throw new Error(`Error fetching thread: ${error.message}`);
+  }
+}
+
+export async function addCommentToThread(
+  threadId: string,
+  commentText: string,
+  userId: string,
+  path: string,
+) {
+  try {
+    connectToDB();
+
+    // Adding a comment
+
+    //Step 1: Find Original Thread by its ID
+    const originalThread = await Thread.findById(threadId);
+
+    // If we don't have a orginal thread
+    if (!originalThread) {
+      throw new Error("Thread not found");
+    }
+
+    // Create a new Thread with the commit Text
+    const commentThread = new Thread({
+      text: commentText,
+      author: userId,
+      parentId: threadId,
+    });
+
+    //Task: Save the new Thread
+    const savedCommentThread = await commentThread.save();
+    // Update the original thread to include the new comment
+    originalThread.children.push(savedCommentThread._id);
+    //Saving original thread
+    await originalThread.save();
+
+    revalidatePath(path);
+  } catch (error: any) {
+    throw new Error(`Error adding coment to thread: ${error.message}`);
   }
 }
