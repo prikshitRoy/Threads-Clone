@@ -10,7 +10,6 @@ import { redirect } from "next/navigation";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const user = await currentUser();
-
   if (!user) return null;
 
   const userInfo = await fetchUser(params.id);
