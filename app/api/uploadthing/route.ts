@@ -3,7 +3,7 @@
 
 import { createNextRouteHandler } from "uploadthing/next";
 
-import { ourFileRouter } from "@/app/api/uploadthing/core";
+import { ourFileRouter } from "./core";
 
 // Export routes for Next App Router
 export const { GET, POST } = createNextRouteHandler({

@@ -1,5 +1,3 @@
-// use to setup clerk webhooks for Community-Group
-
 import mongoose from "mongoose";
 
 const communitySchema = new mongoose.Schema({
